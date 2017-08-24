@@ -9,19 +9,19 @@ import java.util.List;
  */
 public interface BackPackDao {
     //create
-    void add (Backpack backpack); //L
+    void add (Backpack backpack);
 
 //    //read
-//    List<Backpack> getAll(); //A
+    List getAll();
 //
 //
-//    Backpack findById(int id); //B
+   Backpack findById(int id);
 //
 //    //update
-//    void update(); //N
+    void update(Backpack backpack, String newBrand, String newModel, String newDescription, int newWaterResistance, int newDurability, int newProductId, double newPrice);
 //
 //    //delete
-//    void deleteById(int id); //M
+//    void deleteById(int id);
 //
 
 }

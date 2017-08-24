@@ -9,5 +9,8 @@ CREATE TABLE IF NOT EXISTS backpacks (
   durability int,
   productId int,
   price DOUBLE,
+  leash BOOLEAN,
+  camelback BOOLEAN,
+  pannier BOOLEAN,
   type VARCHAR
 );

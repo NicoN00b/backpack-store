@@ -5,15 +5,24 @@ package models;
  */
     public class Bikepack extends Backpack {
 
-        private boolean pannier = true;
+        private static boolean pannier = true;
+        public static final String DATABASE_TYPE = "bikepack";
 
 
-    public Bikepack(String brand, String model, String description, int waterResistance, int durability, int productId, double price, boolean pannier) {
+    public Bikepack(String brand, String model, String description, int waterResistance, int durability, int productId, double price) {
             super(brand, model,  description, waterResistance, durability, productId, price);
-            this.pannier = pannier;
+
+
+            type = DATABASE_TYPE;
 
         }
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
     public boolean isPannier() {
@@ -79,5 +88,7 @@ package models;
     public void setPrice(double price) {
         this.price = price;
     }
+
+
 
 }

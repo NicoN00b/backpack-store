@@ -5,12 +5,23 @@ package models;
  */
 public class Hikepack extends Backpack{
 
-    private boolean camelback = true;
+    private static boolean  camelback = true;
+    public static final String DATABASE_TYPE = "hikepack";
 
-    public Hikepack(String brand, String model, String description, int waterResistance, int durability, int productId, double price, boolean camelback) {
+    public Hikepack(String brand, String model, String description, int waterResistance, int durability, int productId, double price) {
         super(brand, model, description, waterResistance, durability, productId, price);
-        this.camelback = camelback;
 
+
+        type = DATABASE_TYPE;
+
+    }
+
+    public static boolean isCamelback() {
+        return camelback;
+    }
+
+    public static void setCamelback(boolean camelback) {
+        Hikepack.camelback = camelback;
     }
 
     public String getBrand() {

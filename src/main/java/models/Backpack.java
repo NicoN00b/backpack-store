@@ -4,7 +4,7 @@ package models;
  * Created by Guest on 8/24/17.
  */
 public class Backpack {
-    private int id;
+    public int id;
     public String brand;
     public String model;
     public  String description;
@@ -12,6 +12,8 @@ public class Backpack {
     public int durability;
     public int productId;
     public double price;
+
+    public String type;
 
 
     public Backpack( String brand, String model, String description, int waterResistance, int durability, int productId, double price) {
@@ -88,4 +90,38 @@ public class Backpack {
         this.price = price;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Backpack backpack = (Backpack) o;
+
+        if (id != backpack.id) return false;
+        if (waterResistance != backpack.waterResistance) return false;
+        if (durability != backpack.durability) return false;
+        if (productId != backpack.productId) return false;
+        if (Double.compare(backpack.price, price) != 0) return false;
+        if (!brand.equals(backpack.brand)) return false;
+        if (!model.equals(backpack.model)) return false;
+        if (!description.equals(backpack.description)) return false;
+        return type.equals(backpack.type);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + brand.hashCode();
+        result = 31 * result + model.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + waterResistance;
+        result = 31 * result + durability;
+        result = 31 * result + productId;
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + type.hashCode();
+        return result;
+    }
 }

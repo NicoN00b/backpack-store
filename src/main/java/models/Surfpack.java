@@ -5,13 +5,15 @@ package models;
  */
 public class Surfpack extends Backpack {
     private boolean leash= true;
+    public static final String DATABASE_TYPE = "surfpack";
 
 
 
-    public Surfpack(String brand, String model, String description, int waterResistance, int durability, int productId, double price, boolean leash) {
+    public Surfpack(String brand, String model, String description, int waterResistance, int durability, int productId, double price) {
         super(brand,  model,  description, waterResistance, durability, productId, price);
         this.leash = leash;
 
+        type = DATABASE_TYPE;
     }
 
     public boolean isLeash() {
@@ -78,5 +80,12 @@ public class Surfpack extends Backpack {
         this.price = price;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 }

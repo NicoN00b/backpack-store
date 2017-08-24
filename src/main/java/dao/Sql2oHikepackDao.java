@@ -1,9 +1,12 @@
 package dao;
 
 import models.Backpack;
+import models.Hikepack;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
+
+import java.util.List;
 
 /**
  * Created by Guest on 8/24/17.
@@ -15,15 +18,55 @@ public class Sql2oHikepackDao implements BackPackDao {
     public Sql2oHikepackDao(Sql2o sql2o) {
         this.sql2o = sql2o;
     }
+
     @Override
     public void add(Backpack backpack) {
-        String sql = "INSERT INTO backpacks (brand, model, description, waterResistance, durability, productId, price) VALUES (:brand, :model, :description, :waterResistance, :durability, :productId, :price)";
+        String sql = "INSERT INTO backpacks (brand, model, description, waterResistance, durability, productId, price, type) VALUES (:brand, :model, :description, :waterResistance, :durability, :productId, :price, :type)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql)
                     .bind(backpack)
                     .executeUpdate()
                     .getKey();
             backpack.setId(id);
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    @Override
+    public List getAll() {
+        try(Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM backpacks WHERE type = 'hikepack'")
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Hikepack.class);
+        }
+    }
+
+    @Override
+    public Hikepack findById(int id) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM backpacks WHERE id = :id  AND type = 'hikepack'")
+                    .addParameter("id", id)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetchFirst(Hikepack.class);
+        }
+    }
+
+    @Override
+    public void update(Backpack backpack, String newBrand, String newModel, String newDescription, int newWaterResistance, int newDurability, int newProductId, double newPrice){
+        String sql = "UPDATE backpacks SET (brand, model, description, waterResistance, durability, productId, price) = (:brand, :model, :description, :waterResistance, :durability, :productId, :price) WHERE id = :id AND type = 'hikepack'";
+
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("brand", newBrand)
+                    .addParameter("model", newModel)
+                    .addParameter("description", newDescription)
+                    .addParameter("waterResistance", newWaterResistance)
+                    .addParameter("durability", newDurability)
+                    .addParameter("productId", newProductId)
+                    .addParameter("price", newPrice)
+                    .addParameter("id", backpack.getId())
+                    .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }

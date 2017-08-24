@@ -2,6 +2,7 @@ package dao;
 
 import models.Backpack;
 import models.Hikepack;
+import models.Hikepack;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,9 +40,33 @@ public class Sql2oHikepackDaoTest {
         assertNotEquals(originalBackpackId, hikepack.getId());
     }
 
+    @Test
+    public void addedHikePacksAreReturnedFromGetAll() throws Exception {
+        Hikepack hikepack = setupHikepack();
+        Hikepack hikepack1= setupHikepack();
+        backPackDao.add(hikepack);
+        backPackDao.add(hikepack1);
+        assertEquals(2, backPackDao.getAll().size());
+    }
+    @Test
+    public void HikePackisfoundById() throws Exception {
+        Hikepack hikepack = setupHikepack();
+        backPackDao.add(hikepack);
+        int hikepackId = hikepack.getId();
+        assertEquals(1, hikepackId);
+    }
+
+    @Test
+    public void updateChangesHikepackContent() throws Exception {
+        Hikepack hikepack = setupHikepack();
+        backPackDao.add(hikepack);
+        backPackDao.update(hikepack,"banjo bros", "pleasureBag", "hard working commute pack", 5, 5, 15234, 99.99);
+        Hikepack updatedHikepack = backPackDao.findById(hikepack.getId());
+        assertNotEquals(hikepack, updatedHikepack.getModel());
+    }
 
     public Hikepack setupHikepack (){
-        return new Hikepack("banjo nros", "commuteaction", "hard working commute pack", 5, 5, 15234, 99.99, true);
+        return new Hikepack("banjo nros", "commuteaction", "hard working commute pack", 5, 5, 15234, 99.99);
     }
 
 }
