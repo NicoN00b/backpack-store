@@ -61,6 +61,14 @@ public class Sql2oSurfpackDaoTest {
         assertNotEquals(surfpack, updatedSurfpack.getModel());
     }
 
+    @Test
+    public void deleteByIdDeletesCorrectSurfpack() throws Exception {
+        Surfpack testSurfpack = setupSurfpack();
+        surfpackDao.add(testSurfpack);
+        surfpackDao.deleteById(testSurfpack.getId());
+        assertEquals(0, surfpackDao.getAll().size());
+    }
+
 
     public Surfpack setupSurfpack (){
         return new Surfpack("banjo nros", "commuteaction", "hard working commute pack", 5, 5, 15234, 99.99);

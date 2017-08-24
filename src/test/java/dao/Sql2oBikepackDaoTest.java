@@ -66,10 +66,18 @@ public class Sql2oBikepackDaoTest {
     @Test
     public void updateChangesBikepackContent() throws Exception {
         Bikepack bikepack = setupBikepack();
-       backPackDao.add(bikepack);
-       backPackDao.update(bikepack,"banjo bros", "pleasureBag", "hard working commute pack", 5, 5, 15234, 99.99);
+        backPackDao.add(bikepack);
+        backPackDao.update(bikepack,"banjo bros", "pleasureBag", "hard working commute pack", 5, 5, 15234, 99.99);
         Bikepack updatedBikepack = backPackDao.findById(bikepack.getId());
         assertNotEquals(bikepack, updatedBikepack.getModel());
+    }
+
+    @Test
+    public void deleteByIdDeletesCorrectBikepack() throws Exception {
+        Bikepack testBikepack = setupBikepack();
+        backPackDao.add(testBikepack);
+        backPackDao.deleteById(testBikepack.getId());
+        assertEquals(0, backPackDao.getAll().size());
     }
 
 

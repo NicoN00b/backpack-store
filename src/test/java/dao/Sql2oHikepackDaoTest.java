@@ -65,6 +65,14 @@ public class Sql2oHikepackDaoTest {
         assertNotEquals(hikepack, updatedHikepack.getModel());
     }
 
+    @Test
+    public void deleteByIdDeletesCorrectHikepack() throws Exception {
+        Hikepack testHikepack = setupHikepack();
+        backPackDao.add(testHikepack);
+        backPackDao.deleteById(testHikepack.getId());
+        assertEquals(0, backPackDao.getAll().size());
+    }
+
     public Hikepack setupHikepack (){
         return new Hikepack("banjo nros", "commuteaction", "hard working commute pack", 5, 5, 15234, 99.99);
     }

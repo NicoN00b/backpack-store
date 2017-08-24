@@ -21,7 +21,7 @@ public interface BackPackDao {
     void update(Backpack backpack, String newBrand, String newModel, String newDescription, int newWaterResistance, int newDurability, int newProductId, double newPrice);
 //
 //    //delete
-//    void deleteById(int id);
+   void deleteById(int id);
 //
 
 }
