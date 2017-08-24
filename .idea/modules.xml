@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pack-attack.iml" filepath="$PROJECT_DIR$/.idea/modules/pack-attack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pack-attack_main.iml" filepath="$PROJECT_DIR$/.idea/modules/pack-attack_main.iml" group="pack-attack" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pack-attack_test.iml" filepath="$PROJECT_DIR$/.idea/modules/pack-attack_test.iml" group="pack-attack" />
+    </modules>
+  </component>
+</project>
